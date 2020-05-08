@@ -17,7 +17,7 @@ function createWindow() {
     console.log(url);
     shell.openExternal(url);
   });
-  //window.webContents.openDevTools();
+  window.webContents.openDevTools();
 }
 
 function readCalendar(event) {
@@ -50,4 +50,8 @@ app.on("window-all-closed", () => {
 
 ipcMain.on("async-request-data", (event, arg) => {
   readCalendar(event);
+});
+
+ipcMain.on("async-open-url", (event, arg) => {
+  shell.openExternal(arg);
 });
