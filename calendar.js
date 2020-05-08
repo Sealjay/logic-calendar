@@ -11,15 +11,17 @@ class CalendarEntry extends React.Component {
       this.startDateObject.getHours() +
       1 +
       ":" +
+      (this.startDateObject.getMinutes() < 10 ? "0" : "") +
       this.startDateObject.getMinutes() +
       "-" +
       (this.endDateObject.getHours() + 1) +
       ":" +
+      (this.endDateObject.getMinutes() < 10 ? "0" : "") +
       this.endDateObject.getMinutes();
     this.classes =
       "list-group-item d-flex justify-content-between align-items-center";
     if (this.props.isAllDay == true) {
-      this.classes += " active";
+      this.classes += " list-group-item-secondary";
     }
   }
   render() {
@@ -69,10 +71,12 @@ class NextMeeting extends React.Component {
       this.startDateObject.getHours() +
       1 +
       ":" +
+      (this.startDateObject.getMinutes() < 10 ? "0" : "") +
       this.startDateObject.getMinutes() +
       "-" +
       (this.endDateObject.getHours() + 1) +
       ":" +
+      (this.endDateObject.getMinutes() < 10 ? "0" : "") +
       this.endDateObject.getMinutes();
     if (this.props.isAllDay == true) {
       this.humanTime = "All Day";

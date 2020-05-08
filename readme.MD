@@ -37,6 +37,7 @@ You may need to change permissions on the script with `chmod +x runApp.sh`.
 - Date pagination
 - Rejecting/declining meetings
 - Customisable refresh times
+- General refactoring
 
 ## Contributing
 

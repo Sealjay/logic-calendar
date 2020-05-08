@@ -32,7 +32,7 @@
           updateCalendar(events.value);
           let dateContainer = document.getElementById("lastupdate");
           let dateNow=new Date();
-          let humanTime=dateNow.getHours() + ":" + dateNow.getMinutes();
+          let humanTime=dateNow.getHours() + ":" + (dateNow.getMinutes()<10?'0':'') + dateNow.getMinutes();
           dateContainer.innerText=humanTime;
           interval=setInterval(function(){ refreshEvent()}, 30000);
         }
@@ -78,7 +78,7 @@
         <div id="nextmeeting" class="col"></div>
       </div>
       <div class="row">
-        <div class="col">Last updated at <em id="lastupdate">never</em>.</div>
+        <div class="col"><small>Last server refresh at <em id="lastupdate">never</em>.<br/>Other updates every 5 minutes.</small></div>
       </div>
     </div>
     <script
