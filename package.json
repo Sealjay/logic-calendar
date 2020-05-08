@@ -1,0 +1,21 @@
+{
+  "name": "logic-calendar",
+  "version": "1.0.0",
+  "description": "A tool to display your calendar for the day in an easy to use fashion, without requiring Outlook or other tools. So you can focus on your work and get things done.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Chris Lloyd-Jones",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^8.2.5",
+    "prettier": "2.0.5"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "got": "^11.1.1"
+  }
+}

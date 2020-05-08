@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>What's up?</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/javascript">
+      const { ipcRenderer } = require("electron"); // import the module
+      // here we request our message and the event listener we added before, will respond and because it's JSON file we need to parse it
+      ipcRenderer.send("async-request-data", "");
+
+      var tick=0;
+      var currentEvents;
+      var interval;
+
+      function renderCalendar(events) {
+        {
+          currentEvents=events.value;
+          updateCalendar(events.value);
+          let dateContainer = document.getElementById("lastupdate");
+          let dateNow=new Date();
+          let humanTime=dateNow.getHours() + ":" + dateNow.getMinutes();
+          dateContainer.innerText=humanTime;
+          interval=setInterval(function(){ refreshEvent()}, 30000);
+        }
+      }
+
+      ipcRenderer.on("receive-data", (event, args) => {
+        renderCalendar(args);
+      });
+
+      function refreshEvent() {
+        tick++;
+        updateCalendar(currentEvents);
+        console.log("Refesh events.");
+        if (tick>120) {
+          tick=0;
+          console.log("Server refresh.")
+          clearInterval(interval);
+          ipcRenderer.send("async-request-data", "");
+        }
+      }
+
+    </script>
+  </head>
+  <body>
+    <div id="react-container" class="container-fluid">
+      <div class="col">
+        <div class="row">
+          <h3>
+            What's up?
+          </h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col" id="calendar-container"></div>
+      </div>
+        <div class="col">
+          <div class="row">
+            <h3>
+              Coming next?
+            </h3>
+          </div>
+      <div class="row">
+        <div id="nextmeeting" class="col"></div>
+      </div>
+      <div class="row">
+        <div class="col">Last updated at <em id="lastupdate">never</em>.</div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+    <script src="calendar.js" type="text/babel"></script>
+  </body>
+</html>
