@@ -11,7 +11,7 @@
   "author": "Chris Lloyd-Jones",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^9.4.0",
+    "electron": "^11.5.0",
     "prettier": "2.0.5"
   },
   "dependencies": {
