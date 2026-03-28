@@ -1,0 +1,4 @@
+optConfig:
+  optOutStrategy: true
+  optOut: true
+action: issue
